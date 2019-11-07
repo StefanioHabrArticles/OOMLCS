@@ -5,7 +5,7 @@ namespace MachineLearning.Perceptron
     /// <summary>
     /// Нейрон
     /// </summary>
-    class Neuron
+    internal class Neuron
     {
         private Vector inputs;
 

@@ -3,7 +3,7 @@
     /// <summary>
     /// Текучий выпрямитель
     /// </summary>
-    class LeakyReLU : ActivationFunction, IActivationFunction
+    public class LeakyReLU : ActivationFunction, IActivationFunction
     {
         public LeakyReLU(double alpha) : base(alpha) { }
 

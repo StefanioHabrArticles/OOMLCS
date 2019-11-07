@@ -5,7 +5,7 @@ namespace MachineLearning.Perceptron
     /// <summary>
     /// Слой перцептрона
     /// </summary>
-    class Layer
+    internal class Layer
     {
         /// <summary>
         /// Матрица весов на предыдущей итерации обучения

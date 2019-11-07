@@ -2,7 +2,7 @@
 
 namespace MachineLearning.Functions
 {
-    abstract class ActivationFunction
+    public abstract class ActivationFunction
     {
         [JsonProperty("alpha")]
         protected double alpha;

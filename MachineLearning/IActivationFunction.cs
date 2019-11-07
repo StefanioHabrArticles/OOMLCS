@@ -3,7 +3,7 @@
     /// <summary>
     /// Интерфейс функции активации
     /// </summary>
-    interface IActivationFunction
+    public interface IActivationFunction
     {
         /// <summary>
         /// Функция активации

@@ -3,7 +3,7 @@
     /// <summary>
     /// Конфигурация слоя перцептрона
     /// </summary>
-    class LayerConfig
+    public class LayerConfig
     {
         /// <summary>
         /// Число нейронов текущего слоя

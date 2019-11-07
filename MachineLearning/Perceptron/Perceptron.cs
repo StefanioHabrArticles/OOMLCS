@@ -9,7 +9,7 @@ namespace MachineLearning.Perceptron
     /// <summary>
     /// Перцептрон
     /// </summary>
-    class Perceptron
+    public class Perceptron
     {
         /// <summary>
         /// Слои перцептрона
@@ -129,7 +129,8 @@ namespace MachineLearning.Perceptron
         /// Сохранить модель в JSON файл
         /// </summary>
         /// <param name="path">Путь сохранения</param>
-        public void SaveModel(string path)
+        /// <returns>Имя созданного файла</returns>
+        public string SaveModel(string path)
         {
             var settings = new JsonSerializerSettings
             {
@@ -147,7 +148,8 @@ namespace MachineLearning.Perceptron
                 };
             }
 
-            using (StreamWriter file = File.CreateText($"{path}model{System.DateTime.Now.Ticks}.json"))
+            string filename = $"model{System.DateTime.Now.Ticks}.json";
+            using (StreamWriter file = File.CreateText($"{path}{filename}"))
             {
                 JsonSerializer serializer = new JsonSerializer
                 {
@@ -156,6 +158,7 @@ namespace MachineLearning.Perceptron
                 };
                 serializer.Serialize(file, model);
             }
+            return filename;
         }
 
         /// <summary>

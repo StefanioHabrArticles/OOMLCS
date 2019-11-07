@@ -1,12 +1,11 @@
-﻿using System;
-using static System.Math;
+﻿using static System.Math;
 
 namespace MachineLearning.Functions
 {
     /// <summary>
     /// Сигмоида
     /// </summary>
-    class Sigmoid : ActivationFunction, IActivationFunction
+    public class Sigmoid : ActivationFunction, IActivationFunction
     {
         public Sigmoid(double alpha) : base(alpha) { }
 

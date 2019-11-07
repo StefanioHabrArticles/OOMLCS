@@ -2,7 +2,7 @@
 
 namespace MachineLearning.Functions
 {
-    class SoftPlus : ActivationFunction, IActivationFunction
+    public class SoftPlus : ActivationFunction, IActivationFunction
     {
         public SoftPlus(double alpha) : base(alpha) { }
 

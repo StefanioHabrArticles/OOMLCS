@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using static System.Math;
 
 namespace MachineLearning.Functions
@@ -7,7 +6,7 @@ namespace MachineLearning.Functions
     /// <summary>
     /// Гиперболический тангенс
     /// </summary>
-    class Tanh : ActivationFunction, IActivationFunction
+    public class Tanh : ActivationFunction, IActivationFunction
     {
         [JsonProperty("beta")]
         private double beta;

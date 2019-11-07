@@ -6,7 +6,7 @@ namespace MachineLearning.LinearAlgebra
     /// <summary>
     /// Вектор из линейной алгебры
     /// </summary>
-    class Vector
+    public class Vector
     {
         /// <summary>
         /// Рандомайзер
