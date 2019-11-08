@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using MachineLearning.LinearAlgebra;
 using static System.Console;
+using System;
 
 namespace MachineLearning.Perceptron
 {
@@ -20,6 +21,16 @@ namespace MachineLearning.Perceptron
         /// Индекс выходного слоя
         /// </summary>
         int outputLayerIndex;
+
+        /// <summary>
+        /// Значение фукнции стоимости (ошибки), преодолённое за последнее обучение
+        /// </summary>
+        public double LastError { get; private set; }
+
+        /// <summary>
+        /// Длительность последнего обучения
+        /// </summary>
+        public TimeSpan LastLearningTime { get; private set; }
 
         /// <summary>
         /// Конструктор.
@@ -84,6 +95,8 @@ namespace MachineLearning.Perceptron
 #endif
             } while (epochCost > threshold);
             w.Stop();
+            LastError = epochCost;
+            LastLearningTime = TimeSpan.FromMilliseconds(w.ElapsedMilliseconds);
 #if DEBUG
             WriteLine($"{w.ElapsedMilliseconds / 1000d} seconds");
 #endif
@@ -100,12 +113,17 @@ namespace MachineLearning.Perceptron
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Auto
             };
-            var model = new[]
+            var model = new
             {
-                new
+                lastError = 1.01d,
+                lastTime = TimeSpan.FromSeconds(1.25d),
+                parameters = new[]
                 {
-                    config = new LayerConfig(),
-                    weights = new double[1][]
+                    new
+                    {
+                        config = new LayerConfig(),
+                        weights = new double[1][]
+                    }
                 }
             };
             using (StreamReader r = new StreamReader(path))
@@ -115,12 +133,14 @@ namespace MachineLearning.Perceptron
             }
             if (model != null)
             {
-                layers = new Layer[model.Length];
+                layers = new Layer[model.parameters.Length];
                 outputLayerIndex = layers.Length - 1;
                 for (int i = 0; i < layers.Length; i++)
                 {
-                    layers[i] = new Layer(model[i].config);
-                    layers[i].SetWeights(model[i].weights);
+                    LastError = model.lastError;
+                    LastLearningTime = model.lastTime;
+                    layers[i] = new Layer(model.parameters[i].config);
+                    layers[i].SetWeights(model.parameters[i].weights);
                 }
             }
         }
@@ -138,17 +158,22 @@ namespace MachineLearning.Perceptron
                 TypeNameHandling = TypeNameHandling.Auto
             };
 
-            var model = new object[layers.Length];
-            for (int i = 0; i < model.Length; i++)
+            var model = new
             {
-                model[i] = new
+                lastError = LastError,
+                lastLearningTime = LastLearningTime,
+                parameters = new object[layers.Length]
+            };
+            for (int i = 0; i < model.parameters.Length; i++)
+            {
+                model.parameters[i] = new
                 {
                     config = layers[i].Config,
                     weights = layers[i].GetWeights()
                 };
             }
 
-            string filename = $"model{System.DateTime.Now.Ticks}.json";
+            string filename = $"model{DateTime.Now.Ticks}.json";
             using (StreamWriter file = File.CreateText($"{path}{filename}"))
             {
                 JsonSerializer serializer = new JsonSerializer
