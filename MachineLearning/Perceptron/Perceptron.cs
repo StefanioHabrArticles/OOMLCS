@@ -174,7 +174,7 @@ namespace MachineLearning.Perceptron
             }
 
             string filename = $"model{DateTime.Now.Ticks}.json";
-            using (StreamWriter file = File.CreateText($"{path}{filename}"))
+            using (StreamWriter file = File.CreateText($@"{path}\{filename}"))
             {
                 JsonSerializer serializer = new JsonSerializer
                 {
