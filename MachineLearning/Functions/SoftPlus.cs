@@ -2,6 +2,9 @@
 
 namespace MachineLearning.Functions
 {
+    /// <summary>
+    /// Смягчённый выпрямитель
+    /// </summary>
     public class SoftPlus : ActivationFunction, IActivationFunction
     {
         public SoftPlus(double alpha) : base(alpha) { }
