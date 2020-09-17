@@ -107,6 +107,6 @@ for (int i = 0; i < trainset.Length; i++)
 string modelFile = approximator.SaveModel(@"C:\Some\path");
 // загрузка
 var approximator = new Perceptron(null);
-approximator.LoadModel($@"C:\Some\path\{ModelFile}");
+approximator.LoadModel($@"C:\Some\path\{modelFile}");
 Console.WriteLine(approximator.Predict(new Vector(3.4567d)));
 ```
